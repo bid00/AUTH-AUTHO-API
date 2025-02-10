@@ -2,11 +2,7 @@ import mongoose, { model } from "mongoose";
 import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
-    firstName:{
-        type: String,
-        required:true,
-    },
-    lastName:{
+    fullName:{
         type: String,
         required:true,
     },
@@ -17,7 +13,6 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required:true,
     },
     phone: {
         type: String,
@@ -28,7 +23,6 @@ const userSchema = new mongoose.Schema({
         default: Date.now,
     },
     googleId: { type: String }, 
-    facebookId: { type: String }
 });
 
 const User = mongoose.model('Users',userSchema);

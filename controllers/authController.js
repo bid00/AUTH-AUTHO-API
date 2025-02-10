@@ -9,9 +9,9 @@ import { accessTokenSecret } from '../config.js'
 //@route POST /api/auth/register
 const register = async (req,res)=>{
     try {
-        const {firstName,lastName, phone , email, password }=req.body;
+        const {fullName, phone , email, password }=req.body;
 
-        if (!firstName || !lastName || !email ||!password) {
+        if (!fullName || !email ||!password ||!phone) {
             return res.status(422).json({message: "please fill in all fields"});
         }
 
@@ -20,7 +20,7 @@ const register = async (req,res)=>{
            return res.status(400).json({message: "Account with same Email exists"});
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        user = new User({firstName,lastName,phone,email,password:hashedPassword});
+        user = new User({fullName,phone,email,password:hashedPassword});
         await user.save();
         res.status(201).json({message: "User registered Successfully"});
 
@@ -48,13 +48,11 @@ const login = async (req,res)=>{
         }
 
         const accessToken = jwt.sign({userId :user._id},accessTokenSecret);
-        return res.status(200).json({id:user._id,name:user.firstName+" "+user.lastName,email:user.email,accessToken})
+        return res.status(200).json({id:user._id,name:user.fullName,email:user.email,accessToken})
     } catch (error) {
         return res.status(500).json({message : error.message});
 
     }
 }
-
-
 
 export {register,login} ;
