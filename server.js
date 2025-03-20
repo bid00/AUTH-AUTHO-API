@@ -33,7 +33,7 @@ app.use('/api/auth',auth);
 app.use('/api/user',autho,user);
 
 app.get("/",(req,res)=>{
-    res.status(200).send("<h1>Welcome to my Auth Autho API<h1/>");
+    res.status(200).send("Welcome to my Auth Autho API");
 })
 
 
