@@ -32,7 +32,7 @@ app.use(passport.session());
 app.use('/api/auth',auth);
 app.use('/api/user',autho,user);
 
-app.get("/",(req,res)=>{
+app.get("/home",(req,res)=>{
     res.status(200).send("Welcome to my Auth Autho API");
 })
 
