@@ -6,7 +6,6 @@ import cors from "./middleware/corsMiddleware.js";
 import user from "./routes/userRoutes.js";
 import passport from "passport";
 import session from "express-session";
-import swaggerDocs from "./config/swagger.js";
 import dotenv from "dotenv";
 import passportSetup from "./config/passport.js";
 import corsMiddleware from "./middleware/corsMiddleware.js";
