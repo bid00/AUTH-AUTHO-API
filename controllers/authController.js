@@ -48,7 +48,7 @@ const login = async (req,res)=>{
         }
 
         const accessToken = jwt.sign({userId :user._id},process.env.accessTokenSecret);
-        return res.status(200).json({id:user._id,name:user.fullName,email:user.email,accessToken})
+        return res.status(200).json({accessToken})
     } catch (error) {
         return res.status(500).json({message : error.message});
 

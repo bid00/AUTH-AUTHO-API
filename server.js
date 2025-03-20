@@ -6,6 +6,7 @@ import cors from "./middleware/corsMiddleware.js";
 import user from "./routes/userRoutes.js";
 import passport from "passport";
 import session from "express-session";
+import swaggerDocs from "./config/swagger.js";
 import dotenv from "dotenv";
 import passportSetup from "./config/passport.js";
 import corsMiddleware from "./middleware/corsMiddleware.js";
@@ -40,6 +41,8 @@ app.get("/",(req,res)=>{
     res.status(200).send("Welcome to my Auth Autho API");
 })
 
+//@desc Load API Docs
+swaggerDocs(app);
 
 
 
