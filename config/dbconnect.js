@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
-
-const mongoUrl = "mongodb://localhost:27017/vision"
+import dotenv  from "dotenv";
+dotenv.config();
+const mongoUrl = process.env.MONGODB_URL;
 const connectDB = async () => {
     try {
-        await mongoose.connect(mongoUrl);
+        await mongoose.connect(mongoUrl,{
+            useNewUrlParser:true,
+            useUnifiedTopology:true
+        });
         console.log("MongoDB connected");
         
     } catch (error) {

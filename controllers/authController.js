@@ -1,7 +1,7 @@
 import User from '../models/userSchema.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
-import { accessTokenSecret } from '../config.js'
+
 
 
 
@@ -47,7 +47,7 @@ const login = async (req,res)=>{
             return res.status(401).json({message: "Email or password is invalid"})
         }
 
-        const accessToken = jwt.sign({userId :user._id},accessTokenSecret);
+        const accessToken = jwt.sign({userId :user._id},process.env.accessTokenSecret);
         return res.status(200).json({id:user._id,name:user.fullName,email:user.email,accessToken})
     } catch (error) {
         return res.status(500).json({message : error.message});

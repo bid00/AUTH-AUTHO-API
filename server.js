@@ -6,10 +6,14 @@ import cors from "./middleware/corsMiddleware.js";
 import user from "./routes/userRoutes.js";
 import passport from "passport";
 import session from "express-session";
+import dotenv from "dotenv";
 import passportSetup from "./config/passport.js";
 import corsMiddleware from "./middleware/corsMiddleware.js";
 const app = express();
+dotenv.config();
 connectDB();
+
+
 
 
 app.use(express.json());

@@ -1,6 +1,4 @@
 import express from "express";
-import jwt from 'jsonwebtoken';
-import { accessTokenSecret } from "../config.js";
 import { login, register } from "../controllers/authController.js";
 import passport from "passport";
 
