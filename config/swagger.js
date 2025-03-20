@@ -4,7 +4,6 @@ import express from "express";
 
 const app = express();
 
-// Swagger Configuration
 const swaggerOptions = {
     definition: {
         openapi: "3.0.0",
@@ -14,7 +13,7 @@ const swaggerOptions = {
             description: "API documentation for my Express app by Abdelrahman",
         },
         servers: [
-            { url: "https://auth-autho-api.vercel.app/" }, 
+            { url: "https://auth-autho-api.vercel.app/" },
         ],
     },
     apis: ["./routes/*.js"],
@@ -22,7 +21,11 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-// Expose Swagger UI as an API route
-app.use("/api-docs", serve, setup(swaggerDocs));
-
-export default app;
+// Create an API handler for Swagger UI
+export default function handler(req, res) {
+    if (req.method === "GET") {
+        return setup(swaggerDocs)(req, res);
+    } else {
+        res.status(405).send("Method Not Allowed");
+    }
+}
