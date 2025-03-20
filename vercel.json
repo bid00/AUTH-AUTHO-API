@@ -18,7 +18,7 @@
         },
         { 
             "src": "/api-docs",
-            "dest": "config/swagger.js" 
+            "dest": "/config/swagger.js" 
         }
     ]
 }
