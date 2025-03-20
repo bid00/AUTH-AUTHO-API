@@ -10,6 +10,9 @@ import swaggerDocs from "./config/swagger.js";
 import dotenv from "dotenv";
 import passportSetup from "./config/passport.js";
 import corsMiddleware from "./middleware/corsMiddleware.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
+import path from "path";
 const app = express();
 dotenv.config();
 connectDB();
@@ -42,11 +45,26 @@ app.get("/",(req,res)=>{
 })
 
 //@desc Load API Docs
-swaggerDocs(app);
 
+// Swagger Configuration
+const swaggerOptions = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Auth Autho API",
+            version: "1.0.0",
+            description: "API documentation for my Express app by Abdelrahman",
+        },
+        servers: [{ url: "https://auth-autho-api.vercel.app/" }],
+    },
+    apis: [path.resolve("routes/*.js")], // Absolute path
+};
 
+// Generate Swagger Docs
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-
+// Serve Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.listen(8080||process.env.PORT,()=>{
     console.log("server is running on port 8000");
