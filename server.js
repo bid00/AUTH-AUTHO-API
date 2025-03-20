@@ -41,6 +41,6 @@ app.get("/",(req,res)=>{
 
 
 
-app.listen(8000,()=>{
+app.listen(8080||process.env.PORT,()=>{
     console.log("server is running on port 8000");
 });
