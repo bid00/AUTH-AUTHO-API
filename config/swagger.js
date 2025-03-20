@@ -1,23 +1,28 @@
-import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+const express = require("express");
 
+const app = express();
+
+// Swagger Configuration
 const swaggerOptions = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "Auth_autho API",
+            title: "Auth Autho API",
             version: "1.0.0",
             description: "API documentation for my Express app by Abdelrahman",
         },
-        servers: [{ url: "https://auth-autho-api.vercel.app" }],
+        servers: [
+            { url: "https://auth-autho-api.vercel.app/" }, 
+        ],
     },
-    apis: ["./routes/*.js"], // Location of route files
+    apis: ["./routes/*.js"],
 };
 
-const swaggerSpec = swaggerJSDoc(swaggerOptions);
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-const swaggerDocs = (app) => {
-    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-};
+// Expose Swagger UI as an API route
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-export default swaggerDocs;
+module.exports = app;
